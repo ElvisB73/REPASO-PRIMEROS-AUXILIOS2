@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repaso — Primeros Auxilios | Tripulante de Cabina</title>
+<style>
+:root{
+  --bg:#05070d;
+  --card:#0e1524;
+  --blue:#1d4ed8;
+  --blue-d:#0b1a3d;
+  --blue2:#2563eb;
+  --cyan:#38bdf8;
+  --steel:#64748b;
+  --green:#16a34a;
+  --red:#dc2626;
+  --ink:#e2e8f0;
+  --ink-soft:#94a3b8;
+  --border:#1e293b;
+  --shadow: 0 10px 30px rgba(0,0,0,.55);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #0b1533 0%, transparent 60%),
+    radial-gradient(1000px 500px at 110% 10%, #071022 0%, transparent 55%),
+    var(--bg);
+  color:var(--ink);
+  font-family:'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  font-size:19px;
+  line-height:1.55;
+}
+h1,h2,h3,h4{font-family:'Segoe UI', system-ui, sans-serif; margin:0 0 .4em 0; line-height:1.2;}
+p{margin:.4em 0 1em 0;}
+
+header.top{
+  background:linear-gradient(120deg,#020409 0%, var(--blue-d) 55%, #0a1a4d 100%);
+  color:#fff;
+  padding:38px 20px 30px;
+  text-align:center;
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+  border-bottom:2px solid var(--blue);
+}
+header.top::after{
+  content:"";
+  position:absolute; inset:0;
+  background:repeating-linear-gradient(45deg, rgba(56,189,248,.05) 0 2px, transparent 2px 40px);
+  pointer-events:none;
+}
+header.top .eyebrow{
+  display:inline-block;
+  background:rgba(56,189,248,.14);
+  border:1px solid rgba(56,189,248,.35);
+  padding:6px 18px;
+  border-radius:999px;
+  font-weight:700;
+  letter-spacing:.12em;
+  font-size:15px;
+  margin-bottom:14px;
+  color:var(--cyan);
+}
+header.top h1{
+  font-size:clamp(30px,5vw,52px);
+  font-weight:900;
+  text-shadow:0 4px 18px rgba(0,0,0,.5);
+  margin-bottom:8px;
+}
+header.top .sub{
+  font-size:20px;
+  font-weight:600;
+  opacity:.85;
+  color:var(--ink-soft);
+}
+header.top .chips{
+  margin-top:18px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+}
+header.top .chips span{
+  background:rgba(29,78,216,.2);
+  border:1px solid rgba(56,189,248,.3);
+  padding:6px 16px;
+  border-radius:999px;
+  font-size:15px;
+  font-weight:700;
+  color:var(--ink);
+}
+
+nav.tabs{
+  position:sticky; top:0; z-index:50;
+  background:#050810ee;
+  backdrop-filter:blur(8px);
+  border-bottom:3px solid var(--blue);
+  display:flex;
+  overflow-x:auto;
+  padding:8px 8px;
+  gap:6px;
+  box-shadow:0 4px 14px rgba(0,0,0,.4);
+}
+nav.tabs button{
+  flex:0 0 auto;
+  border:1px solid var(--border);
+  background:#0b1120;
+  color:var(--ink-soft);
+  font-weight:800;
+  font-size:15.5px;
+  padding:12px 16px;
+  border-radius:14px;
+  cursor:pointer;
+  white-space:nowrap;
+  transition:.15s;
+}
+nav.tabs button:hover{background:#101a30; color:var(--ink);}
+nav.tabs button.active{
+  background:linear-gradient(120deg,var(--blue),var(--blue2));
+  color:#fff;
+  border-color:var(--cyan);
+  box-shadow:0 6px 16px rgba(29,78,216,.5);
+  transform:translateY(-1px);
+}
+
+main{max-width:980px; margin:0 auto; padding:30px 18px 90px;}
+section.panel{display:none;}
+section.panel.active{display:block; animation:fade .35s ease;}
+@keyframes fade{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+
+.moduletitle{
+  display:flex; align-items:center; gap:14px;
+  margin-bottom:22px;
+}
+.moduletitle .num{
+  background:linear-gradient(135deg,var(--cyan),var(--blue));
+  color:#04070f; font-weight:900; font-size:22px;
+  width:52px; height:52px; border-radius:16px;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:var(--shadow); flex-shrink:0;
+}
+.moduletitle h2{font-size:28px; color:var(--cyan); font-weight:900;}
+.moduletitle .desc{font-size:16px; color:var(--ink-soft); margin-top:2px;}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:22px 24px;
+  margin-bottom:20px;
+  box-shadow:var(--shadow);
+}
+.card h3{
+  color:var(--cyan);
+  font-size:21px;
+  font-weight:900;
+  border-bottom:2px dashed var(--border);
+  padding-bottom:8px;
+  margin-bottom:12px;
+}
+.card h4{color:#93c5fd; font-size:18px; font-weight:800; margin-top:14px;}
+.card.alt{border-color:#1e3a8a; background:#0a1226;}
+.card.warn{border-color:#334155; background:#0c1120;}
+.card.ok{border-color:#134e4a; background:#081b1a;}
+
+.tag-row{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0;}
+.tag{
+  background:linear-gradient(120deg,var(--blue),var(--blue2));
+  color:#fff; font-weight:800; font-size:14px;
+  padding:5px 13px; border-radius:999px;
+}
+.tag.cy{background:linear-gradient(120deg,var(--cyan),#0284c7); color:#03101c;}
+.tag.or{background:linear-gradient(120deg,var(--steel),#334155);}
+.tag.gr{background:linear-gradient(120deg,#0f766e,#0ea5e9);}
+
+table{width:100%; border-collapse:collapse; margin:14px 0; font-size:17px;}
+th{
+  background:linear-gradient(120deg,var(--blue),var(--blue2));
+  color:#fff; text-align:left; padding:10px 12px; font-size:15.5px;
+}
+td{padding:9px 12px; border-bottom:1px solid var(--border); color:var(--ink);}
+tr:nth-child(even) td{background:#0a0f1c;}
+
+ul,ol{padding-left:24px;}
+li{margin-bottom:6px;}
+strong{color:var(--cyan);}
+.hl{background:linear-gradient(120deg,#1e3a8a,#0369a1); color:#fff; padding:1px 6px; border-radius:6px; font-weight:800;}
+code{background:#0b1120; border:1px solid var(--border); padding:2px 7px; border-radius:6px; font-family:'Consolas',monospace; color:var(--cyan); font-weight:700;}
+
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+@media(max-width:680px){.grid2{grid-template-columns:1fr;}}
+
+.stat-row{display:flex; flex-wrap:wrap; gap:14px; margin:16px 0;}
+.stat{
+  flex:1; min-width:110px; text-align:center;
+  background:linear-gradient(160deg,#0f1526,#0a0e1a);
+  border:1px solid var(--border); border-radius:16px; padding:14px 8px;
+}
+.stat b{display:block; font-size:26px; color:var(--cyan);}
+.stat span{font-size:13.5px; color:var(--ink-soft); font-weight:700;}
+
+/* TEST */
+#test-intro{
+  background:linear-gradient(120deg,var(--blue-d),var(--blue),#0369a1);
+  color:#fff; border-radius:22px; padding:28px; text-align:center; box-shadow:var(--shadow);
+  border:1px solid var(--cyan);
+}
+#test-intro h2{font-size:30px;}
+#test-intro p{font-size:18px; opacity:.9;}
+#progressWrap{
+  position:sticky; top:66px; z-index:40;
+  background:#050810ee; backdrop-filter:blur(6px);
+  border:1px solid var(--border); border-radius:16px;
+  padding:12px 18px; margin:18px 0; box-shadow:var(--shadow);
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+}
+#progressBarOuter{flex:1; min-width:160px; background:#0b1120; border-radius:999px; height:16px; overflow:hidden; border:1px solid var(--border);}
+#progressBarInner{height:100%; width:0%; background:linear-gradient(90deg,var(--cyan),var(--blue),var(--blue2)); transition:.3s;}
+#progressText{font-weight:900; color:var(--cyan); white-space:nowrap;}
+#gradeBtn{
+  border:none; cursor:pointer; font-weight:900; font-size:16px;
+  padding:10px 20px; border-radius:12px; color:#fff;
+  background:linear-gradient(120deg,var(--green),#0ea5e9);
+  opacity:.5; pointer-events:none;
+}
+#gradeBtn.enabled{opacity:1; pointer-events:auto; box-shadow:0 6px 16px rgba(22,163,74,.4);}
+
+.qcard{
+  background:var(--card); border:1px solid var(--border); border-radius:18px;
+  padding:20px 22px; margin-bottom:16px; box-shadow:var(--shadow);
+  transition:.2s;
+}
+.qcard .qhead{display:flex; gap:10px; align-items:flex-start; margin-bottom:12px;}
+.qcard .qnum{
+  flex-shrink:0; width:36px; height:36px; border-radius:10px;
+  background:linear-gradient(135deg,var(--cyan),var(--blue)); color:#04070f;
+  display:flex; align-items:center; justify-content:center; font-weight:900; font-size:15px;
+}
+.qcard .qtext{font-weight:700; font-size:18.5px; color:var(--ink);}
+.qcard .qtype{font-size:12.5px; font-weight:800; color:var(--cyan); text-transform:uppercase; letter-spacing:.05em;}
+.options{display:flex; flex-direction:column; gap:9px;}
+.opt{
+  display:flex; align-items:center; gap:10px;
+  border:1px solid var(--border); border-radius:12px; padding:11px 14px;
+  cursor:pointer; font-size:17px; background:#0a0f1c; transition:.15s; color:var(--ink);
+}
+.opt:hover{border-color:var(--blue); background:#0d1428;}
+.opt .bullet{
+  width:24px; height:24px; border-radius:7px; border:2px solid var(--blue);
+  flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:900; color:var(--cyan);
+}
+.qcard.locked .opt{cursor:default; pointer-events:none;}
+.qcard.locked .opt:not(.chosen){opacity:.4;}
+.opt.chosen{border-color:var(--cyan); background:#0f1e3d; font-weight:800;}
+.opt.chosen .bullet{background:var(--blue); color:#fff;}
+
+.qcard.correct{border-color:var(--green); background:#07160f;}
+.qcard.incorrect{border-color:var(--red); background:#1a0a0a;}
+.opt.correct-answer{border-color:var(--green); background:#0d2318; font-weight:800;}
+.opt.correct-answer .bullet{background:var(--green); color:#fff;}
+.opt.wrong-answer{border-color:var(--red); background:#2a0f0f;}
+.opt.wrong-answer .bullet{background:var(--red); color:#fff;}
+.explain{
+  margin-top:12px; padding:12px 14px; border-radius:12px;
+  background:#0a0f1c; border-left:4px solid var(--cyan); font-size:16px; color:var(--ink-soft);
+  display:none;
+}
+.qcard.graded .explain{display:block;}
+.badge-result{
+  display:inline-block; font-weight:900; font-size:13px; padding:4px 12px; border-radius:999px; margin-left:8px;
+}
+.badge-result.ok{background:var(--green); color:#fff;}
+.badge-result.bad{background:var(--red); color:#fff;}
+
+#finalScore{
+  display:none; text-align:center; border-radius:22px; padding:30px;
+  color:#fff; box-shadow:var(--shadow); margin:20px 0;
+  background:linear-gradient(120deg,var(--blue-d),var(--blue),#0369a1);
+  border:1px solid var(--cyan);
+}
+#finalScore.show{display:block;}
+#finalScore .big{font-size:54px; font-weight:900; color:var(--cyan);}
+#finalScore .msg{font-size:19px; font-weight:700; margin-top:6px;}
+#retryBtn{
+  margin-top:16px; border:none; cursor:pointer; font-weight:900; font-size:16px;
+  padding:11px 24px; border-radius:12px; background:#fff; color:var(--blue-d);
+}
+.lockNotice{
+  background:#0c1120; border:1px solid var(--border); border-radius:14px; padding:14px 18px;
+  margin-bottom:18px; font-weight:700; color:#93c5fd; font-size:16px;
+}
+
+/* DESARROLLO */
+.devcard{
+  background:var(--card); border:1px solid var(--border); border-radius:18px;
+  padding:20px 22px; margin-bottom:16px; box-shadow:var(--shadow);
+}
+.devcard .devnum{
+  display:inline-flex; width:34px; height:34px; border-radius:10px;
+  background:linear-gradient(135deg,var(--blue),var(--cyan)); color:#04070f;
+  align-items:center; justify-content:center; font-weight:900; font-size:15px; margin-right:8px;
+}
+.devcard .devq{font-weight:800; font-size:18px; color:var(--ink);}
+.devcard textarea{
+  width:100%; margin-top:12px; min-height:90px; border-radius:12px;
+  border:1px solid var(--border); padding:12px; font-family:inherit; font-size:16px;
+  resize:vertical; background:#0a0f1c; color:var(--ink);
+}
+.devcard textarea:focus{outline:none; border-color:var(--cyan);}
+.devcard .togglebtn{
+  margin-top:10px; border:1px solid var(--border); cursor:pointer; font-weight:800; font-size:14px;
+  padding:8px 16px; border-radius:10px; background:#0d1428; color:var(--cyan);
+}
+.devcard .modelo{
+  display:none; margin-top:12px; padding:12px 14px; border-radius:12px;
+  background:#081b1a; border-left:4px solid var(--green); font-size:16px; color:var(--ink-soft);
+}
+.devcard.show .modelo{display:block;}
+
+footer{text-align:center; color:var(--ink-soft); font-size:14px; padding:20px; opacity:.7;}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <span class="eyebrow">✈️ TRIPULANTE DE CABINA · PRIMEROS AUXILIOS</span>
+  <h1>Repaso Primeros Auxilios</h1>
+  <div class="sub">Bioseguridad · EPP · Botiquín · Triage · Anatomía · Signos Vitales · Camillas</div>
+  <div class="chips">
+    <span>8 módulos de teoría</span>
+    <span>40 preguntas — nivel avanzado</span>
+    <span>Apartado de desarrollo</span>
+    <span>Respuesta bloqueada al elegir</span>
+  </div>
+</header>
+
+<nav class="tabs" id="tabsNav"></nav>
+
+<main id="mainContent"></main>
+
+<footer>Repaso interactivo — Uso académico · Primeros Auxilios TCP · 2026</footer>
+
+<script>
+/* =========================================================
+   CONTENIDO DE MÓDULOS
+   ========================================================= */
+const MODULES = [
+{
+  id:"intro", num:"01", title:"Fundamentos de Primeros Auxilios",
+  desc:"Definición, objetivos y principios generales de actuación",
+  html:`
+  <div class="card">
+    <h3>🩹 ¿Qué son los primeros auxilios?</h3>
+    <p>Son el <strong>conjunto de medidas y actuaciones inmediatas</strong> que se brindan a una persona que sufre un accidente o enfermedad repentina, <strong>antes de la llegada de personal médico especializado</strong> o antes de trasladarla a un centro asistencial.</p>
+    <p>Para un/a tripulante de cabina, esto cobra especial importancia porque en <strong>altitud de crucero</strong> no hay un hospital a la vuelta de la esquina: la respuesta inicial del TCP puede marcar la diferencia entre la vida y la muerte de un pasajero.</p>
+    <div class="tag-row"><span class="tag">No reemplazan la atención médica</span><span class="tag cy">Son inmediatos</span><span class="tag or">Buscan estabilizar</span></div>
+  </div>
+
+  <div class="card alt">
+    <h3>🎯 Objetivo de los primeros auxilios</h3>
+    <ul>
+      <li><strong>Conservar la vida</strong> — es la prioridad absoluta.</li>
+      <li><strong>Evitar complicaciones</strong> físicas y psicológicas mientras llega ayuda especializada.</li>
+      <li><strong>Ayudar en la recuperación</strong> de la persona afectada.</li>
+      <li><strong>Aliviar el dolor y el sufrimiento</strong> en la medida de lo posible.</li>
+      <li><strong>Asegurar el traslado</strong> del lesionado o enfermo de forma segura hacia un centro asistencial.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>📋 Principios generales de actuación</h3>
+    <ol>
+      <li><strong>Mantener la calma</strong> y proyectar seguridad al pasajero y a la tripulación.</li>
+      <li><strong>Evaluar antes de actuar:</strong> observar la escena, identificar riesgos para uno mismo antes de acercarse.</li>
+      <li><strong>No mover al lesionado</strong> sin necesidad, salvo que exista peligro inminente.</li>
+      <li><strong>Pedir ayuda</strong> de inmediato: activar protocolo de emergencia médica de la aerolínea (ej. contacto con servicio médico terrestre tipo MedLink).</li>
+      <li><strong>Actuar dentro del alcance de la formación recibida</strong>, sin realizar maniobras para las que no se está capacitado.</li>
+    </ol>
+  </div>
+
+  <div class="card ok">
+    <h3>👩‍✈️ Rol del tripulante de cabina</h3>
+    <p>El TCP actúa como <strong>primer respondiente</strong> a bordo. Su función no es diagnosticar ni curar, sino <strong>estabilizar, proteger y comunicar</strong> la situación al piloto al mando y, si aplica, a servicios médicos en tierra, para decidir si se requiere un desvío o aterrizaje de emergencia.</p>
+  </div>
+  `
+},
+{
+  id:"derechos", num:"02", title:"Derechos del Paciente y Consentimiento",
+  desc:"Marco ético y legal antes de brindar ayuda",
+  html:`
+  <div class="card">
+    <h3>⚖️ Derechos del paciente</h3>
+    <ul>
+      <li><strong>Derecho a la información:</strong> a saber qué se le va a hacer y por qué.</li>
+      <li><strong>Derecho a la dignidad y al respeto:</strong> ser tratado sin discriminación.</li>
+      <li><strong>Derecho a la confidencialidad:</strong> su condición médica no se comenta con terceros sin necesidad.</li>
+      <li><strong>Derecho a la privacidad:</strong> resguardar su intimidad durante la atención (ej. usar una manta, alejar a curiosos).</li>
+      <li><strong>Derecho a aceptar o rechazar</strong> la ayuda que se le ofrece, si está consciente y en capacidad de decidir.</li>
+      <li><strong>Derecho a un trato igualitario</strong>, sin importar edad, nacionalidad, religión o condición social.</li>
+    </ul>
+  </div>
+
+  <div class="card alt">
+    <h3>✍️ Tipos de consentimiento</h3>
+    <table>
+      <tr><th>Tipo</th><th>Cuándo aplica</th><th>Características</th></tr>
+      <tr><td><strong>Explícito</strong></td><td>Paciente consciente, orientado y capaz de decidir</td><td>Autorización clara, verbal o escrita, antes de actuar</td></tr>
+      <tr><td><strong>Implícito</strong></td><td>Paciente inconsciente, confundido o incapaz de responder, en riesgo de muerte</td><td>Se <strong>presume</strong> que aceptaría la ayuda si pudiera decidir; se actúa para salvarle la vida</td></tr>
+    </table>
+    <p><strong>Ejemplo a bordo:</strong> si un pasajero consciente dice "estoy bien, no necesito ayuda", se debe <span class="hl">respetar su decisión</span> (consentimiento explícito negativo). Si un pasajero pierde el conocimiento, se actúa de inmediato bajo consentimiento implícito.</p>
+  </div>
+
+  <div class="card ok">
+    <h3>🗣️ Consentimiento explícito — formas</h3>
+    <div class="tag-row">
+      <span class="tag">Verbal — "Sí, ayúdeme"</span>
+      <span class="tag cy">No verbal — asiente con la cabeza</span>
+      <span class="tag or">Escrito — en formularios médicos formales</span>
+    </div>
+  </div>
+
+  <div class="card warn">
+    <h3>⚠️ Importante</h3>
+    <p>El consentimiento implícito <strong>no da vía libre a cualquier procedimiento</strong>: solo cubre las acciones razonables y necesarias para preservar la vida o evitar un daño mayor, dentro de la capacitación del TCP. Si un menor de edad viaja sin acompañante y requiere ayuda, también aplica el consentimiento implícito hasta poder contactar a un adulto responsable.</p>
+  </div>
+  `
+},
+{
+  id:"bioseguridad", num:"03", title:"Bioseguridad y EPP",
+  desc:"Protección del tripulante y del pasajero frente a riesgos biológicos",
+  html:`
+  <div class="card">
+    <h3>🧫 Bioseguridad — definición</h3>
+    <p>Conjunto de <strong>normas, medidas y procedimientos</strong> orientados a proteger la salud del personal, del paciente y del ambiente frente a riesgos biológicos, físicos o químicos derivados de la atención de una emergencia.</p>
+    <div class="tag-row">
+      <span class="tag">Universalidad</span>
+      <span class="tag cy">Uso de barreras</span>
+      <span class="tag or">Manejo y eliminación adecuada de desechos</span>
+    </div>
+  </div>
+
+  <div class="card alt">
+    <h3>🧷 Principios de bioseguridad</h3>
+    <ul>
+      <li><strong>Universalidad:</strong> se debe tratar a <strong>todo</strong> fluido corporal como potencialmente infeccioso, sin importar si se conoce o no el estado de salud del paciente.</li>
+      <li><strong>Barreras protectoras:</strong> uso de guantes, mascarillas y demás EPP para evitar el contacto directo con sangre y fluidos.</li>
+      <li><strong>Eliminación de material contaminado:</strong> desechar guantes, gasas y objetos punzocortantes usados en contenedores apropiados, nunca en la basura común.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>🥽 Equipo de Protección Personal (EPP)</h3>
+    <table>
+      <tr><th>Elemento</th><th>Función</th></tr>
+      <tr><td>Guantes desechables</td><td>Barrera de contacto con sangre y fluidos</td></tr>
+      <tr><td>Mascarilla</td><td>Protege vías respiratorias de salpicaduras y aerosoles</td></tr>
+      <tr><td>Protección ocular / facial</td><td>Evita salpicaduras en ojos y mucosas</td></tr>
+      <tr><td>Bata o delantal desechable</td><td>Protege la ropa y piel del uniforme</td></tr>
+    </table>
+    <p><strong>Secuencia básica:</strong> colocarse el EPP <em>antes</em> de tocar al paciente y retirarlo de forma ordenada al finalizar, evitando tocar la parte contaminada. Los guantes se retiran de último, tocando solo la cara interna.</p>
+  </div>
+
+  <div class="card ok">
+    <h3>🚮 Manejo de desechos biológicos</h3>
+    <p>Todo material que estuvo en contacto con sangre o fluidos (guantes, gasas) se coloca en una <strong>bolsa roja o bolsa de riesgo biológico</strong>. Los objetos punzocortantes (agujas) van en un <strong>contenedor rígido rotulado</strong>, nunca sueltos ni reencapuchados con las dos manos.</p>
+  </div>
+  `
+},
+{
+  id:"botiquin", num:"04", title:"El Botiquín",
+  desc:"Definición y elementos básicos del kit de primeros auxilios",
+  html:`
+  <div class="card">
+    <h3>🧰 ¿Qué es un botiquín?</h3>
+    <p>Es un <strong>recolector organizado de materiales, insumos y medicamentos básicos</strong>, destinado a brindar atención inmediata ante una lesión o malestar repentino, mientras se gestiona ayuda especializada.</p>
+    <div class="tag-row"><span class="tag">Portátil</span><span class="tag cy">Organizado</span><span class="tag or">Revisión periódica</span></div>
+  </div>
+
+  <div class="card alt">
+    <h3>📦 Elementos del botiquín</h3>
+    <ul>
+      <li><strong>Material de curación:</strong> gasas estériles, vendas elásticas, apósitos, esparadrapo, algodón.</li>
+      <li><strong>Antisépticos:</strong> alcohol, agua oxigenada, solución yodada.</li>
+      <li><strong>Suero fisiológico</strong> para limpieza de heridas o lavado ocular.</li>
+      <li><strong>Guantes desechables</strong> y mascarilla de RCP (barrera para reanimación).</li>
+      <li><strong>Tijeras y pinzas</strong> de punta roma.</li>
+      <li><strong>Termómetro.</strong></li>
+      <li><strong>Analgésicos y antipiréticos básicos</strong> (según regulación de cada aerolínea).</li>
+      <li><strong>Manual de primeros auxilios</strong> o guía rápida de actuación.</li>
+      <li><strong>Linterna de bolsillo</strong> y guantes de manejo.</li>
+    </ul>
+  </div>
+
+  <div class="card ok">
+    <h3>✈️ En el contexto de aviación</h3>
+    <table>
+      <tr><th>Kit</th><th>Sigla</th><th>Contenido</th></tr>
+      <tr><td>Botiquín de Primeros Auxilios</td><td><strong>FAK</strong> (First Aid Kit)</td><td>Insumos básicos para lesiones menores, accesible a la tripulación</td></tr>
+      <tr><td>Kit Médico de Emergencia</td><td><strong>EMK</strong> (Emergency Medical Kit)</td><td>Equipo avanzado (medicamentos, instrumental) para emergencias mayores, uso preferente de personal médico a bordo</td></tr>
+    </table>
+  </div>
+
+  <div class="card warn">
+    <h3>⚠️ Buenas prácticas</h3>
+    <p>El botiquín debe revisarse <strong>periódicamente</strong>: verificar fechas de vencimiento, reponer lo utilizado y confirmar que el sello de seguridad esté intacto antes del vuelo. El EMK, al contener medicamentos, solo se abre bajo indicación médica o en situaciones de riesgo vital extremo.</p>
+  </div>
+  `
+},
+{
+  id:"triage", num:"05", title:"Triage",
+  desc:"Clasificación de víctimas según la gravedad y prioridad de atención",
+  html:`
+  <div class="card">
+    <h3>🚑 ¿Qué es el triage?</h3>
+    <p>Es el <strong>proceso de clasificación de víctimas</strong> según la gravedad de sus lesiones y la probabilidad de supervivencia, con el fin de <strong>priorizar la atención</strong> cuando los recursos (personal, tiempo, insumos) son limitados frente al número de afectados.</p>
+  </div>
+
+  <div class="card alt">
+    <h3>🎯 Objetivo del triage</h3>
+    <p><strong>Hacer el mayor bien al mayor número de personas posible</strong>, atendiendo primero a quienes tienen mayor posibilidad de sobrevivir con una intervención oportuna, y organizando el uso de los recursos disponibles. No busca salvar a todos por igual, sino optimizar el resultado global.</p>
+  </div>
+
+  <div class="card">
+    <h3>🔢 Los 4 pasos del triage</h3>
+    <ol>
+      <li><strong>Asegurar</strong> — garantizar que la escena sea segura antes de intervenir, tanto para el rescatista como para las víctimas.</li>
+      <li><strong>Organizar</strong> — establecer un orden de trabajo y distribuir tareas o responsables si hay más de un ayudante.</li>
+      <li><strong>Asignar (clasificar)</strong> — evaluar rápidamente a cada persona y asignarle una prioridad/categoría según su gravedad.</li>
+      <li><strong>Iniciar</strong> — comenzar la atención según el orden de prioridad establecido, empezando por los casos más críticos y viables.</li>
+    </ol>
+  </div>
+
+  <div class="card ok">
+    <h3>🎨 Categorías comunes de clasificación</h3>
+    <table>
+      <tr><th>Color</th><th>Prioridad</th><th>Significado</th></tr>
+      <tr><td>🔴 Rojo</td><td>Inmediata</td><td>Riesgo vital, requiere atención de inmediato</td></tr>
+      <tr><td>🟡 Amarillo</td><td>Diferida</td><td>Grave pero puede esperar un poco sin riesgo inmediato de muerte</td></tr>
+      <tr><td>🟢 Verde</td><td>Menor</td><td>Lesiones leves, puede caminar y esperar</td></tr>
+      <tr><td>⚫ Negro</td><td>Fallecido / expectante</td><td>Sin signos de vida o lesiones incompatibles con la vida</td></tr>
+    </table>
+  </div>
+  `
+},
+{
+  id:"cuerpo", num:"06", title:"El Cuerpo Humano",
+  desc:"Posición anatómica, planos, regiones y cavidades corporales",
+  html:`
+  <div class="card">
+    <h3>🧍 Posición anatómica</h3>
+    <p>Es la <strong>posición de referencia estándar</strong> usada para describir el cuerpo humano: de pie, erguido, mirando al frente, con los brazos a los lados del cuerpo y las <strong>palmas de las manos hacia adelante</strong>, los pies ligeramente separados.</p>
+    <p>Todas las descripciones de ubicación (arriba, abajo, delante, detrás) se hacen tomando esta posición como punto de partida, sin importar la postura real en que se encuentre el paciente.</p>
+  </div>
+
+  <div class="card alt">
+    <h3>📐 Los planos anatómicos</h3>
+    <table>
+      <tr><th>Plano</th><th>Divide el cuerpo en...</th></tr>
+      <tr><td><strong>Sagital</strong></td><td>Mitad derecha e izquierda</td></tr>
+      <tr><td><strong>Frontal (coronal)</strong></td><td>Mitad anterior (frente) y posterior (espalda)</td></tr>
+      <tr><td><strong>Transversal (horizontal)</strong></td><td>Mitad superior e inferior</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>🗺️ Regiones corporales</h3>
+    <ul>
+      <li><strong>Cabeza y cuello</strong></li>
+      <li><strong>Tórax</strong> (tronco superior)</li>
+      <li><strong>Abdomen</strong> (tronco inferior)</li>
+      <li><strong>Extremidades superiores</strong> (brazo, antebrazo, mano)</li>
+      <li><strong>Extremidades inferiores</strong> (muslo, pierna, pie)</li>
+      <li><strong>Espalda / dorso</strong></li>
+    </ul>
+  </div>
+
+  <div class="card ok">
+    <h3>🫁 Cavidades corporales</h3>
+    <table>
+      <tr><th>Cavidad</th><th>Contenido</th></tr>
+      <tr><td>Craneal</td><td>Encéfalo</td></tr>
+      <tr><td>Espinal (vertebral)</td><td>Médula espinal</td></tr>
+      <tr><td>Torácica</td><td>Corazón, pulmones, grandes vasos</td></tr>
+      <tr><td>Abdominal</td><td>Estómago, hígado, intestinos, bazo, riñones</td></tr>
+      <tr><td>Pélvica</td><td>Vejiga, órganos reproductores, parte del intestino</td></tr>
+    </table>
+  </div>
+  `
+},
+{
+  id:"signos", num:"07", title:"Signos Vitales",
+  desc:"Definición, monitoreo y valores de referencia",
+  html:`
+  <div class="card">
+    <h3>💓 Definición de signos vitales</h3>
+    <p>Son las <strong>señales medibles</strong> que reflejan el funcionamiento básico del organismo y su estado de salud: <strong>pulso, frecuencia respiratoria, presión arterial y temperatura</strong> (algunos incluyen la saturación de oxígeno).</p>
+  </div>
+
+  <div class="card alt">
+    <h3>⏱️ ¿Cuándo monitorear los signos vitales?</h3>
+    <ul>
+      <li><strong>Al inicio</strong> de la atención, como valoración base.</li>
+      <li><strong>De forma periódica</strong> mientras se espera ayuda especializada, para detectar cambios.</li>
+      <li>Ante <strong>cualquier cambio</strong> en el estado de conciencia o de la condición del pasajero.</li>
+      <li><strong>Antes y después</strong> de administrar cualquier tipo de ayuda o maniobra.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>❤️ Pulso arterial</h3>
+    <p>Es la <strong>onda de expansión</strong> que se percibe al palpar una arteria, generada por la contracción del corazón. Los puntos más comunes para tomarlo son la <strong>arteria radial</strong> (muñeca) y la <strong>arteria carotídea</strong> (cuello); esta última se prefiere cuando el pulso periférico es difícil de percibir.</p>
+    <div class="tag-row"><span class="tag">Radial — muñeca</span><span class="tag cy">Carotídeo — cuello</span><span class="tag or">Braquial — codo (útil en bebés)</span></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card ok">
+      <h4 style="margin-top:0">💗 Frecuencia cardíaca (FC)</h4>
+      <p>Número de <strong>latidos por minuto</strong>. En un adulto en reposo, el valor normal es de aproximadamente <strong>60 a 100 latidos/min</strong>.</p>
+    </div>
+    <div class="card ok">
+      <h4 style="margin-top:0">🌬️ Frecuencia respiratoria (FR)</h4>
+      <p>Número de <strong>respiraciones por minuto</strong>. En un adulto en reposo, el valor normal es de aproximadamente <strong>12 a 20 respiraciones/min</strong>.</p>
+    </div>
+  </div>
+
+  <div class="card warn">
+    <h3>🩸 Presión arterial (PA)</h3>
+    <p>Es la <strong>fuerza que ejerce la sangre</strong> contra las paredes de las arterias al ser bombeada por el corazón. Se mide en dos valores: <strong>sistólica</strong> (presión máxima, cuando el corazón se contrae) y <strong>diastólica</strong> (presión mínima, cuando el corazón se relaja).</p>
+    <p>Valor de referencia normal en un adulto: aproximadamente <span class="hl">120/80 mmHg</span>. Una lectura muy por debajo (ej. 90/60) puede indicar hipotensión, y muy por arriba, hipertensión.</p>
+  </div>
+  `
+},
+{
+  id:"camillas", num:"08", title:"Camillas",
+  desc:"Tipos de camillas y su uso según la situación",
+  html:`
+  <div class="card">
+    <h3>🛏️ Tipos de camilla</h3>
+    <table>
+      <tr><th>Tipo</th><th>Uso principal</th></tr>
+      <tr><td><strong>Camilla rígida</strong></td><td>Inmovilización de columna, sospecha de lesión de cuello o espalda</td></tr>
+      <tr><td><strong>Camilla plegable / de lona</strong></td><td>Traslado general, fácil de almacenar y transportar</td></tr>
+      <tr><td><strong>Camilla tipo cuchara o pala</strong></td><td>Levantar al paciente dividiéndola en dos mitades, minimizando el movimiento de la columna</td></tr>
+      <tr><td><strong>Camilla de canastilla (cesta)</strong></td><td>Rescates en terrenos difíciles o traslados verticales</td></tr>
+      <tr><td><strong>Camilla improvisada</strong></td><td>Elaborada con materiales disponibles cuando no hay una camilla convencional (ej. mantas, tablas)</td></tr>
+    </table>
+  </div>
+
+  <div class="card alt">
+    <h3>✈️ En el entorno de cabina</h3>
+    <p>Dentro de una aeronave, el espacio es limitado, por lo que muchas veces se recurre a <strong>camillas improvisadas o dispositivos de evacuación específicos</strong> del avión, priorizando siempre no agravar una posible lesión de columna.</p>
+  </div>
+
+  <div class="card ok">
+    <h3>📌 Reglas generales al usar una camilla</h3>
+    <ul>
+      <li>Nunca mover a un paciente con sospecha de lesión de columna sin la inmovilización adecuada.</li>
+      <li>Coordinar el levantamiento entre varias personas, contando en voz alta para sincronizar el movimiento.</li>
+      <li>Asegurar al paciente a la camilla con correas antes de trasladarlo.</li>
+      <li>Mantener comunicación constante con el paciente durante el traslado.</li>
+    </ul>
+  </div>
+  `
+}
+];
+
+/* =========================================================
+   PREGUNTAS DEL TEST — NIVEL AVANZADO (20 MC + 20 V/F)
+   ========================================================= */
+const QUESTIONS = [
+{type:"mc", q:"Un pasajero se desmaya brevemente y al despertar insiste en que está bien y rechaza cualquier ayuda. ¿Cómo debe proceder el TCP?",
+ options:["Ignorar su decisión y aplicar los primeros auxilios de todos modos","Respetar su decisión, pero seguir observándolo y ofreciendo ayuda si su estado cambia","Obligarlo a firmar un documento antes de dejarlo tranquilo","Reportarlo como paciente no cooperativo y no volver a atenderlo"], correct:1,
+ exp:"Si el pasajero está consciente y orientado, tiene derecho a rechazar la ayuda (consentimiento explícito negativo). Aun así, se le sigue observando por si su condición empeora."},
+
+{type:"mc", q:"¿Cuál de estas situaciones representa mejor un caso de consentimiento implícito?",
+ options:["Un pasajero firma un formulario antes del vuelo autorizando asistencia médica","Un pasajero pierde el conocimiento tras un episodio de hipoglucemia y no puede responder","Un pasajero pide ayuda verbalmente al sentir mareo","Un familiar autoriza la atención en nombre de un adulto consciente"], correct:1,
+ exp:"El consentimiento implícito se presume únicamente cuando el paciente no puede expresar su voluntad, como al perder el conocimiento, y existe riesgo para su vida."},
+
+{type:"mc", q:"¿Por qué el principio de universalidad en bioseguridad no depende de si el paciente 'parece' sano?",
+ options:["Porque siempre es más rápido usar EPP sin pensarlo","Porque muchas infecciones no muestran signos visibles, así que todo fluido se trata como potencialmente contaminante","Porque la aerolínea lo exige por reglamento de imagen","Porque los guantes protegen solo al paciente, no al tripulante"], correct:1,
+ exp:"La apariencia de salud no garantiza ausencia de infección; por eso se trata todo fluido corporal como potencialmente infeccioso, sin excepción."},
+
+{type:"mc", q:"Durante una atención, se te acaban los guantes de tu talla y solo quedan de otra. ¿Cuál es la conducta correcta según bioseguridad?",
+ options:["Atender sin guantes para no perder tiempo","Usar los guantes disponibles, aunque no sean de tu talla exacta, priorizando la barrera de protección","Esperar a que alguien más traiga guantes de tu talla antes de intervenir","Usar una bolsa plástica en vez de guantes"], correct:1,
+ exp:"Lo esencial es mantener la barrera de protección; unos guantes de otra talla siguen cumpliendo su función, mientras que atender sin ellos expone a riesgo biológico."},
+
+{type:"mc", q:"¿Cuál es la diferencia clave entre el FAK y el EMK a bordo?",
+ options:["El FAK es exclusivo de vuelos internacionales y el EMK de vuelos nacionales","El FAK contiene insumos básicos accesibles a la tripulación; el EMK incluye equipo e insumos más avanzados de uso preferentemente médico","Ambos contienen exactamente los mismos elementos, solo cambia el nombre","El EMK se usa únicamente para lesiones leves como cortadas"], correct:1,
+ exp:"El FAK cubre atención básica y está al alcance de la tripulación; el EMK tiene recursos más avanzados reservados para emergencias mayores, idealmente bajo indicación médica."},
+
+{type:"mc", q:"Durante la revisión previa al vuelo notas que un analgésico del botiquín está vencido desde hace dos meses. ¿Qué debes hacer?",
+ options:["Usarlo igual si es una emergencia leve, ya que casi no pierde efecto","Reportarlo y solicitar su reposición antes de considerar el botiquín apto para el vuelo","Guardarlo al fondo del botiquín para no usarlo primero","Sustituirlo por otro medicamento personal que tengas disponible"], correct:1,
+ exp:"Un insumo vencido debe reportarse y reponerse; usarlo compromete la seguridad del paciente y el botiquín no debe considerarse completo hasta corregirlo."},
+
+{type:"mc", q:"En un vuelo con dos pasajeros afectados simultáneamente (uno con una fractura visible y consciente, otro inconsciente sin pulso detectable), ¿a quién debe priorizar el triage?",
+ options:["Al de la fractura, porque su lesión es más visible y genera más alarma entre los pasajeros","Al inconsciente sin pulso, porque representa el mayor riesgo vital inmediato que requiere intervención urgente","A ambos por igual, dividiendo el tiempo de atención en partes exactas","Al que se queje con más intensidad del dolor"], correct:1,
+ exp:"El triage prioriza según el riesgo vital y la posibilidad de sobrevivir con intervención oportuna; una persona sin pulso detectable requiere atención inmediata."},
+
+{type:"mc", q:"¿Qué diferencia el paso 'Organizar' del paso 'Asignar' dentro del proceso de triage?",
+ options:["Organizar es distribuir tareas y recursos entre los ayudantes disponibles; Asignar es clasificar a cada víctima según su gravedad","Son sinónimos, se pueden usar indistintamente","Organizar ocurre después de iniciar la atención, no antes","Asignar se refiere únicamente a asignar culpas por el incidente"], correct:0,
+ exp:"Organizar estructura el trabajo entre quienes ayudan; Asignar es la clasificación de cada víctima por gravedad, un paso distinto y posterior."},
+
+{type:"mc", q:"Un pasajero presenta una herida que sangra abundantemente pero está consciente y hablando con normalidad. Según el triage por colores, ¿qué categoría es la más apropiada inicialmente?",
+ options:["Verde, porque está consciente y hablando","Amarillo o rojo según la gravedad real del sangrado, no solo por el estado de conciencia","Negro, porque la sangre visible siempre indica riesgo vital inminente","No aplica clasificación si el paciente puede hablar"], correct:1,
+ exp:"El estado de conciencia no basta para clasificar: un sangrado abundante puede evolucionar a shock rápidamente, por lo que la gravedad real de la hemorragia determina la categoría."},
+
+{type:"mc", q:"Si describes que una herida está 'en la cara anterior del antebrazo', ¿qué plano anatómico estás usando como referencia?",
+ options:["El plano sagital", "El plano frontal o coronal", "El plano transversal", "Ningún plano, es una descripción libre"], correct:1,
+ exp:"Anterior y posterior son términos que derivan del plano frontal (coronal), que separa el cuerpo en su cara frontal y su cara posterior."},
+
+{type:"mc", q:"¿Por qué se usa la posición anatómica como referencia incluso cuando el paciente está acostado o en una posición distinta?",
+ options:["Porque estandariza el lenguaje de ubicación anatómica sin importar la postura real del paciente en ese momento","Porque es obligatorio mover siempre al paciente a esa posición antes de describir algo","Porque solo se aplica en pacientes conscientes","Porque cambia según el país donde ocurra la emergencia"], correct:0,
+ exp:"La posición anatómica es un punto de referencia estándar, universal, que permite describir ubicaciones de forma consistente sin depender de la postura real del paciente."},
+
+{type:"mc", q:"¿Cuál de las siguientes estructuras se encuentra en la cavidad torácica y NO en la abdominal?",
+ options:["El hígado", "Los pulmones", "El bazo", "Los riñones"], correct:1,
+ exp:"Los pulmones están en la cavidad torácica; hígado, bazo y riñones se ubican en la cavidad abdominal."},
+
+{type:"mc", q:"Un pasajero tiene una frecuencia cardíaca de 110 latidos por minuto en reposo. ¿Qué se puede afirmar correctamente?",
+ options:["Está dentro del rango normal para un adulto en reposo (60-100 lpm)","Está por encima del rango normal esperado en reposo, lo cual amerita seguir observando otros signos","Es un valor demasiado bajo y preocupante","Ese dato por sí solo confirma un paro cardíaco"], correct:1,
+ exp:"110 lpm supera el rango normal de reposo (60-100 lpm); no es diagnóstico por sí solo, pero amerita seguir vigilando junto a otros signos vitales."},
+
+{type:"mc", q:"¿Cuál es la razón principal por la que se prefiere el pulso carotídeo sobre el radial en ciertas situaciones de emergencia?",
+ options:["Porque el pulso carotídeo es más fácil de percibir cuando el pulso periférico está débil o ausente","Porque el pulso radial nunca se debe usar en primeros auxilios","Porque el carotídeo mide directamente la presión arterial","Porque es el único punto donde se puede contar la frecuencia respiratoria"], correct:0,
+ exp:"En situaciones de shock o baja perfusión, el pulso periférico (radial) puede ser difícil de sentir, mientras que el carotídeo suele seguir siendo palpable."},
+
+{type:"mc", q:"Una lectura de presión arterial de 90/60 mmHg en un adulto sugiere principalmente:",
+ options:["Una presión arterial dentro de lo esperado sin ninguna consideración adicional","Una posible hipotensión, por debajo del valor de referencia de 120/80 mmHg","Una hipertensión que requiere atención inmediata","Un error de medición que siempre debe descartarse sin repetir la toma"], correct:1,
+ exp:"90/60 mmHg está por debajo del valor de referencia (120/80 mmHg) y puede sugerir hipotensión, ameritando observación de otros signos."},
+
+{type:"mc", q:"¿Cuál es el motivo principal para elegir una camilla rígida en lugar de una plegable ante sospecha de lesión de columna?",
+ options:["Porque la camilla rígida es más económica de fabricar","Porque inmoviliza mejor la columna y reduce el riesgo de agravar la lesión durante el traslado","Porque pesa menos que la plegable y es más fácil de cargar","Porque la plegable no está permitida en ningún tipo de traslado"], correct:1,
+ exp:"La camilla rígida ofrece mejor inmovilización de columna, reduciendo el riesgo de agravar una posible lesión medular durante el movimiento."},
+
+{type:"mc", q:"¿Qué precaución es más importante al levantar a un paciente con varias personas usando una camilla?",
+ options:["Que todos hablen al mismo tiempo para animar al paciente","Coordinar el movimiento contando en voz alta para levantar de forma sincronizada","Levantar lo más rápido posible sin coordinación previa","Que solo una persona sostenga todo el peso mientras las demás observan"], correct:1,
+ exp:"La coordinación y sincronización del movimiento evita movimientos bruscos que puedan agravar lesiones, especialmente de columna."},
+
+{type:"mc", q:"¿Cuál de las siguientes acciones contradice directamente los principios generales de actuación en primeros auxilios?",
+ options:["Evaluar la escena antes de acercarse al paciente","Realizar una maniobra avanzada para la que el TCP no está capacitado, solo porque 'algo hay que hacer'","Pedir ayuda especializada de inmediato","Mantener la calma frente al pasajero afectado"], correct:1,
+ exp:"Actuar fuera del alcance de la propia formación puede agravar la situación; los principios indican actuar dentro de lo que se sabe hacer con seguridad."},
+
+{type:"mc", q:"¿Cuál es la diferencia funcional entre 'aliviar el dolor' y 'conservar la vida' como objetivos de los primeros auxilios?",
+ options:["Son el mismo objetivo expresado de dos formas distintas","Conservar la vida es la prioridad absoluta; aliviar el dolor es un objetivo secundario que se atiende sin comprometer lo primero","Aliviar el dolor siempre debe hacerse antes que cualquier otra acción","No tienen relación entre sí dentro de los primeros auxilios"], correct:1,
+ exp:"Conservar la vida es la prioridad máxima; aliviar el dolor es importante pero secundario y nunca debe retrasar acciones que preserven la vida del paciente."},
+
+{type:"mc", q:"Un pasajero con sospecha de lesión de columna necesita ser trasladado, pero no hay camilla rígida disponible a bordo. ¿Cuál es la mejor conducta?",
+ options:["No moverlo bajo ninguna circunstancia, incluso si su vida corre peligro en el lugar donde está","Improvisar una superficie rígida con los materiales disponibles y moverlo solo si es estrictamente necesario, con máxima precaución","Moverlo cargándolo entre dos personas sin ningún soporte","Esperar sin evaluar alternativas hasta el aterrizaje, sin importar la urgencia"], correct:1,
+ exp:"Ante la falta de camilla rígida, se puede improvisar una superficie firme; el movimiento solo se realiza si es estrictamente necesario y con la máxima precaución posible."},
+
+{type:"vf", q:"El objetivo de los primeros auxilios es curar completamente al paciente antes de que llegue ayuda médica especializada.",
+ correct:false, exp:"Falso. Los primeros auxilios buscan estabilizar y evitar complicaciones, no curar de forma definitiva; eso corresponde a la atención médica profesional."},
+
+{type:"vf", q:"Si un pasajero consciente rechaza la ayuda ofrecida, el TCP debe respetar esa decisión, aunque puede seguir observándolo.",
+ correct:true, exp:"Correcto. Un paciente consciente y capaz tiene derecho a rechazar la ayuda; el TCP puede seguir atento por si la situación cambia."},
+
+{type:"vf", q:"El consentimiento implícito permite realizar cualquier procedimiento médico sobre el paciente, sin ninguna limitación.",
+ correct:false, exp:"Falso. El consentimiento implícito solo cubre acciones razonables y necesarias para preservar la vida, dentro del alcance de la formación del TCP."},
+
+{type:"vf", q:"El principio de universalidad indica que solo se debe usar EPP cuando el paciente presenta síntomas visibles de infección.",
+ correct:false, exp:"Falso. La universalidad indica tratar TODO fluido corporal como potencialmente infeccioso, sin importar si hay síntomas visibles o no."},
+
+{type:"vf", q:"Retirarse los guantes tocando únicamente su cara interna es una práctica correcta para evitar contaminarse al quitárselos.",
+ correct:true, exp:"Correcto. Retirar los guantes tocando solo la cara interna evita el contacto con la superficie potencialmente contaminada."},
+
+{type:"vf", q:"El EMK (Emergency Medical Kit) debe estar disponible para que cualquier pasajero lo abra libremente si se siente mal.",
+ correct:false, exp:"Falso. El EMK contiene equipo avanzado y medicamentos, por lo que su uso está reservado preferentemente a personal médico o bajo indicación específica."},
+
+{type:"vf", q:"Un botiquín con un insumo vencido puede considerarse apto para el vuelo si el resto de los elementos están en buen estado.",
+ correct:false, exp:"Falso. Cualquier insumo vencido debe reportarse y reponerse antes de considerar el botiquín completo y apto."},
+
+{type:"vf", q:"El triage busca salvar a todas las víctimas por igual, sin ningún tipo de priorización entre ellas.",
+ correct:false, exp:"Falso. El triage prioriza a quienes tienen mayor probabilidad de sobrevivir con intervención oportuna, buscando el mayor beneficio posible con los recursos disponibles."},
+
+{type:"vf", q:"El estado de conciencia de un paciente es suficiente por sí solo para determinar su categoría de triage, sin evaluar otros factores.",
+ correct:false, exp:"Falso. Se deben evaluar otros factores además de la conciencia, como el sangrado o la estabilidad general, ya que un paciente consciente puede deteriorarse rápidamente."},
+
+{type:"vf", q:"El paso 'Organizar' del triage ocurre antes que el paso 'Asignar'.",
+ correct:true, exp:"Correcto. El orden es Asegurar, Organizar, Asignar e Iniciar."},
+
+{type:"vf", q:"La posición anatómica se usa como referencia solo si el paciente está de pie en el momento de la emergencia.",
+ correct:false, exp:"Falso. La posición anatómica es una referencia estándar que se usa para describir ubicaciones sin importar la postura real del paciente en ese momento."},
+
+{type:"vf", q:"El plano sagital separa el cuerpo en una porción anterior y una posterior.",
+ correct:false, exp:"Falso. El plano sagital separa el cuerpo en mitad derecha e izquierda; el que separa anterior y posterior es el plano frontal (coronal)."},
+
+{type:"vf", q:"Los pulmones se ubican dentro de la cavidad torácica, mientras que el hígado se ubica en la cavidad abdominal.",
+ correct:true, exp:"Correcto. Los pulmones están en la cavidad torácica y el hígado en la cavidad abdominal."},
+
+{type:"vf", q:"Una frecuencia cardíaca de 110 latidos por minuto en reposo está dentro del rango considerado normal para un adulto (60-100 lpm).",
+ correct:false, exp:"Falso. 110 lpm supera el límite superior del rango normal en reposo (60-100 lpm)."},
+
+{type:"vf", q:"El pulso carotídeo suele ser más fácil de detectar que el radial cuando el paciente presenta baja perfusión o shock.",
+ correct:true, exp:"Correcto. En situaciones de shock, el pulso periférico puede debilitarse antes que el central, por lo que el carotídeo suele seguir siendo palpable."},
+
+{type:"vf", q:"Una presión arterial de 90/60 mmHg está por encima del valor de referencia normal de 120/80 mmHg.",
+ correct:false, exp:"Falso. 90/60 mmHg está por DEBAJO del valor de referencia normal, sugiriendo una posible hipotensión."},
+
+{type:"vf", q:"Ante sospecha de lesión de columna sin camilla rígida disponible, la prioridad es improvisar una superficie firme y mover al paciente solo si es estrictamente necesario.",
+ correct:true, exp:"Correcto. Se debe improvisar una superficie firme y minimizar el movimiento, realizándolo solo cuando sea estrictamente necesario y con máxima precaución."},
+
+{type:"vf", q:"Realizar una maniobra médica avanzada para la que el TCP no está capacitado está justificado siempre que la intención sea ayudar al pasajero.",
+ correct:false, exp:"Falso. Los principios de actuación indican actuar dentro del alcance de la propia formación; una buena intención no compensa el riesgo de una maniobra mal ejecutada."}
+];
+
+/* =========================================================
+   PREGUNTAS DE DESARROLLO (no calificadas — para practicar redacción)
+   ========================================================= */
+const DEV_QUESTIONS = [
+{q:"Un pasajero se desmaya y al recuperar el conocimiento rechaza toda ayuda. Explica cómo aplicarías aquí los conceptos de derechos del paciente y consentimiento explícito.",
+ modelo:"Al estar consciente y orientado, el pasajero tiene derecho a decidir sobre su propio cuerpo, incluyendo rechazar la ayuda (consentimiento explícito negativo). El TCP debe respetar esa decisión, pero no debe abandonar su rol de observación: puede quedarse cerca, ofrecer ayuda nuevamente si el estado cambia, y estar listo para actuar bajo consentimiento implícito si el pasajero pierde el conocimiento otra vez."},
+
+{q:"Explica por qué la bioseguridad no depende de si el paciente 'se ve saludable', usando el principio de universalidad.",
+ modelo:"Muchas infecciones no presentan síntomas visibles en el momento de la atención, por lo que basarse en la apariencia sería un criterio poco confiable. El principio de universalidad exige tratar todo fluido corporal como potencialmente infeccioso siempre, independientemente del aspecto o comportamiento del paciente, para proteger tanto al tripulante como a otros pasajeros."},
+
+{q:"Compara el FAK y el EMK: ¿cuándo se usa cada uno y por qué el EMK tiene mayores restricciones de uso?",
+ modelo:"El FAK contiene insumos básicos (gasas, antisépticos, vendas) accesibles a cualquier tripulante para lesiones menores. El EMK incluye equipo e insumos más avanzados, incluyendo medicamentos, por lo que su uso está reservado preferentemente a personal médico a bordo o a situaciones de riesgo vital extremo, ya que un uso incorrecto podría causar más daño que beneficio."},
+
+{q:"Describe cómo aplicarías los cuatro pasos del triage (Asegurar, Organizar, Asignar, Iniciar) en un escenario con tres pasajeros afectados a la vez tras una turbulencia fuerte.",
+ modelo:"Primero se asegura que la cabina esté estable y sin riesgos adicionales. Luego se organiza el trabajo, por ejemplo asignando a otro tripulante para pedir ayuda médica en tierra mientras uno atiende. Después se asigna prioridad evaluando rápidamente a los tres pasajeros (por ejemplo, uno con fractura visible, otro con mareo leve, otro inconsciente). Finalmente se inicia la atención comenzando por el caso de mayor riesgo vital, en este caso el inconsciente."},
+
+{q:"Explica con un ejemplo por qué el estado de conciencia de un paciente no es suficiente por sí solo para clasificarlo en el triage.",
+ modelo:"Un paciente puede estar consciente y hablando con normalidad, pero presentar una hemorragia abundante que lo lleve rápidamente a un shock. Si solo se usa la conciencia como criterio, se subestimaría su gravedad real. Por eso el triage debe considerar también signos como el sangrado, la respiración y la perfusión, no solo si el paciente responde o no."},
+
+{q:"¿Por qué se prefiere en ciertos casos tomar el pulso carotídeo en vez del radial, y qué relación tiene esto con la presión arterial?",
+ modelo:"En situaciones de shock o baja perfusión, el cuerpo prioriza mantener el flujo de sangre hacia órganos vitales, por lo que el pulso periférico (radial) puede debilitarse o desaparecer antes que el central (carotídeo). Esto suele coincidir con una presión arterial baja, por lo que ambos signos —pulso débil y presión baja— pueden aparecer juntos como señales de alarma."},
+
+{q:"Un pasajero con sospecha de lesión de columna necesita trasladarse y no hay camilla rígida disponible. Describe la conducta correcta paso a paso.",
+ modelo:"Primero se evalúa si el traslado es realmente necesario o si se puede esperar en el lugar. Si es indispensable moverlo, se improvisa una superficie firme con los materiales disponibles (tablas, respaldos rígidos). Se coordina el levantamiento entre varias personas, sincronizando el movimiento y manteniendo alineada la columna en todo momento, minimizando cualquier torsión."},
+
+{q:"Explica la diferencia entre 'conservar la vida' y 'aliviar el dolor' como objetivos de los primeros auxilios, y por qué uno tiene prioridad sobre el otro.",
+ modelo:"Conservar la vida es la prioridad absoluta porque sin ella ningún otro objetivo tiene sentido; por ejemplo, controlar una hemorragia grave se antepone a calmar el dolor de una fractura menor. Aliviar el dolor es un objetivo válido y humano, pero secundario: se atiende una vez que el riesgo vital está controlado o en paralelo, sin que retrase acciones críticas."}
+];
+
+/* =========================================================
+   RENDER: TABS + MÓDULOS
+   ========================================================= */
+const nav = document.getElementById("tabsNav");
+const main = document.getElementById("mainContent");
+
+MODULES.forEach((m,i)=>{
+  const btn=document.createElement("button");
+  btn.textContent=m.num+" · "+m.title;
+  btn.dataset.target=m.id;
+  btn.onclick=()=>showPanel(m.id);
+  nav.appendChild(btn);
+
+  const sec=document.createElement("section");
+  sec.className="panel"; sec.id="panel-"+m.id;
+  sec.innerHTML=`
+    <div class="moduletitle">
+      <div class="num">${m.num}</div>
+      <div><h2>${m.title}</h2><div class="desc">${m.desc}</div></div>
+    </div>
+    ${m.html}`;
+  main.appendChild(sec);
+});
+
+// Tab de Desarrollo
+const devBtn=document.createElement("button");
+devBtn.textContent="✍️ DESARROLLO";
+devBtn.dataset.target="desarrollo";
+devBtn.onclick=()=>showPanel("desarrollo");
+nav.appendChild(devBtn);
+
+const devSec=document.createElement("section");
+devSec.className="panel"; devSec.id="panel-desarrollo";
+devSec.innerHTML=`
+  <div class="moduletitle">
+    <div class="num">✍️</div>
+    <div><h2>Preguntas de Desarrollo</h2><div class="desc">Practica tu redacción — responde en el cuadro y compara con la respuesta modelo</div></div>
+  </div>
+  <div id="devWrap"></div>
+`;
+main.appendChild(devSec);
+
+DEV_QUESTIONS.forEach((d,i)=>{
+  const card=document.createElement("div");
+  card.className="devcard"; card.id="dev-"+i;
+  card.innerHTML=`
+    <div class="devq"><span class="devnum">${i+1}</span>${d.q}</div>
+    <textarea placeholder="Escribe aquí tu respuesta..."></textarea>
+    <button class="togglebtn" type="button">Ver respuesta modelo</button>
+    <div class="modelo">${d.modelo}</div>
+  `;
+  card.querySelector(".togglebtn").onclick=()=>{
+    card.classList.toggle("show");
+    card.querySelector(".togglebtn").textContent = card.classList.contains("show") ? "Ocultar respuesta modelo" : "Ver respuesta modelo";
+  };
+  document.getElementById("devWrap").appendChild(card);
+});
+
+// Tab de Test
+const testBtn=document.createElement("button");
+testBtn.textContent="⚡ TEST FINAL";
+testBtn.dataset.target="test";
+testBtn.onclick=()=>showPanel("test");
+nav.appendChild(testBtn);
+
+const testSec=document.createElement("section");
+testSec.className="panel"; testSec.id="panel-test";
+testSec.innerHTML=`
+  <div id="test-intro">
+    <h2>⚡ Evaluación Final — 40 Preguntas (Nivel Avanzado)</h2>
+    <p>20 de selección múltiple y 20 de verdadero/falso. Son preguntas de aplicación, no solo de memoria: lee cada caso con calma.</p>
+    <p><strong>Una vez elijas una respuesta, quedará bloqueada</strong> — no podrás cambiarla hasta terminar todo el test.</p>
+  </div>
+  <div class="lockNotice">🔒 Cada respuesta se bloquea al seleccionarla. No verás si acertaste hasta calificar el test completo.</div>
+  <div id="progressWrap">
+    <div id="progressText">0 / 40 respondidas</div>
+    <div id="progressBarOuter"><div id="progressBarInner"></div></div>
+    <button id="gradeBtn">✓ Calificar Examen</button>
+  </div>
+  <div id="finalScore"></div>
+  <div id="questionsWrap"></div>
+`;
+main.appendChild(testSec);
+
+function showPanel(id){
+  document.querySelectorAll(".panel").forEach(p=>p.classList.remove("active"));
+  document.getElementById("panel-"+id).classList.add("active");
+  document.querySelectorAll("nav.tabs button").forEach(b=>b.classList.toggle("active", b.dataset.target===id));
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+showPanel(MODULES[0].id);
+
+/* =========================================================
+   MOTOR DEL TEST
+   ========================================================= */
+function shuffle(arr){
+  const a=arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+// Preparar preguntas: para MC, mezclar opciones y recalcular índice correcto
+// (esto asegura que la respuesta correcta NO siempre quede en la misma posición ni sea siempre "la más larga a simple vista")
+const runtimeQ = QUESTIONS.map((q,idx)=>{
+  if(q.type==="mc"){
+    const idxArr = q.options.map((opt,i)=>({opt,orig:i}));
+    const shuffled = shuffle(idxArr);
+    const newCorrect = shuffled.findIndex(o=>o.orig===q.correct);
+    return {...q, options:shuffled.map(o=>o.opt), correct:newCorrect, answered:false, chosen:null, id:idx};
+  } else {
+    const flip = Math.random()<0.5;
+    const opts = flip ? ["Falso","Verdadero"] : ["Verdadero","Falso"];
+    const correctLabel = q.correct ? "Verdadero" : "Falso";
+    const newCorrect = opts.indexOf(correctLabel);
+    return {...q, options:opts, correct:newCorrect, answered:false, chosen:null, id:idx};
+  }
+});
+
+const qWrap = document.getElementById("questionsWrap");
+const progressText = document.getElementById("progressText");
+const progressBarInner = document.getElementById("progressBarInner");
+const gradeBtn = document.getElementById("gradeBtn");
+let graded=false;
+
+renderQuestions();
+
+function renderQuestions(){
+  qWrap.innerHTML="";
+  runtimeQ.forEach((q,qi)=>{
+    const card=document.createElement("div");
+    card.className="qcard"; card.id="q-"+qi;
+    card.innerHTML=`
+      <div class="qhead">
+        <div class="qnum">${qi+1}</div>
+        <div>
+          <div class="qtype">${q.type==="mc"?"Selección múltiple":"Verdadero / Falso"}</div>
+          <div class="qtext">${q.q}</div>
+        </div>
+      </div>
+      <div class="options"></div>
+      <div class="explain">${q.exp}</div>
+    `;
+    const optWrap=card.querySelector(".options");
+    q.options.forEach((optText,oi)=>{
+      const opt=document.createElement("div");
+      opt.className="opt";
+      opt.dataset.idx=oi;
+      opt.innerHTML=`<div class="bullet">${String.fromCharCode(65+oi)}</div><div>${optText}</div>`;
+      opt.onclick=()=>selectOption(qi,oi);
+      optWrap.appendChild(opt);
+    });
+    qWrap.appendChild(card);
+  });
+}
+
+function selectOption(qi,oi){
+  if(graded) return;
+  const q = runtimeQ[qi];
+  if(q.answered) return;
+  q.answered = true;
+  q.chosen = oi;
+  const card = document.getElementById("q-"+qi);
+  card.classList.add("locked");
+  card.querySelectorAll(".opt").forEach((el,i)=>{
+    if(i===oi) el.classList.add("chosen");
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  const answeredCount = runtimeQ.filter(q=>q.answered).length;
+  progressText.textContent = answeredCount+" / "+runtimeQ.length+" respondidas";
+  progressBarInner.style.width = (answeredCount/runtimeQ.length*100)+"%";
+  if(answeredCount===runtimeQ.length){
+    gradeBtn.classList.add("enabled");
+  } else {
+    gradeBtn.classList.remove("enabled");
+  }
+}
+
+gradeBtn.onclick=()=>{
+  if(!gradeBtn.classList.contains("enabled") || graded) return;
+  graded = true;
+  let score=0;
+  runtimeQ.forEach((q,qi)=>{
+    const card=document.getElementById("q-"+qi);
+    card.classList.add("graded");
+    const isCorrect = q.chosen===q.correct;
+    if(isCorrect) score++;
+    card.classList.add(isCorrect?"correct":"incorrect");
+    card.querySelector(".qtext").insertAdjacentHTML("beforeend",
+      isCorrect? '<span class="badge-result ok">✓ CORRECTA</span>' : '<span class="badge-result bad">✗ INCORRECTA</span>');
+    card.querySelectorAll(".opt").forEach((el,i)=>{
+      if(i===q.correct) el.classList.add("correct-answer");
+      else if(i===q.chosen && !isCorrect) el.classList.add("wrong-answer");
+    });
+  });
+  showFinalScore(score);
+  progressText.textContent = "Examen calificado";
+  window.scrollTo({top:document.getElementById("finalScore").offsetTop-90, behavior:"smooth"});
+};
+
+function showFinalScore(score){
+  const total = runtimeQ.length;
+  const pct = Math.round(score/total*100);
+  let msg;
+  if(pct>=90) msg="🏆 Excelente — dominas la materia a nivel avanzado.";
+  else if(pct>=75) msg="✅ Muy bien — estás listo/a para el examen.";
+  else if(pct>=60) msg="📘 Aprobado — repasa los temas fallados.";
+  else msg="🔁 Necesitas repasar más antes del examen final.";
+  const box=document.getElementById("finalScore");
+  box.className="show";
+  box.innerHTML=`
+    <div class="big">${score} / ${total}</div>
+    <div class="msg">${pct}% — ${msg}</div>
+    <button id="retryBtn" onclick="location.reload()">↺ Reintentar Test</button>
+  `;
+}
+</script>
+</body>
+</html>
